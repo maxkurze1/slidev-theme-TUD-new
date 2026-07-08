@@ -1,0 +1,84 @@
+# GitHub Pages deployment.
+#
+# Publishes two static sites and a root redirect to GitHub Pages:
+#   • the VitePress docs  → <pages-url>/docs
+#   • the Slidev showcase → <pages-url>/demo
+# For a project page the site is served under /<repo>, so every base is
+# derived from BASE = "/slidev-theme-TUD-new".
+name: Deploy Pages
+
+on:
+  push:
+    branches: [main]
+  workflow_dispatch:
+
+# Permissions required by the Pages deployment.
+permissions:
+  contents: read
+  pages: write
+  id-token: write
+  actions: write
+
+# Allow only one concurrent deploy; don't cancel an in-progress run.
+concurrency:
+  group: pages
+  cancel-in-progress: false
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    env:
+      # Path component of the Pages URL for this project page.
+      BASE: /slidev-theme-TUD-new
+      # Absolute URL of the deck. config.ts passes this through as an external
+      # link, so VitePress does NOT prefix it with the docs `base`.
+      DEMO_URL: https://maxkurze1.github.io/slidev-theme-TUD-new/demo/
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: pnpm/action-setup@v4
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 24
+          cache: pnpm
+
+      - run: pnpm install --frozen-lockfile
+
+      - uses: actions/configure-pages@v5
+
+      - name: Build docs and demo
+        run: |
+          rm -rf _build && mkdir -p _build
+
+          # Docs → /docs
+          # DOCS_BASE="${BASE}/docs/" pnpm exec vitepress build docs
+          # cp -r docs/.vitepress/dist _build/docs
+
+          # Slidev deck → /demo
+          pnpm exec slidev build example.mdc --base "${BASE}/demo/" --out "$PWD/_build/demo"
+
+          # Pages root → docs
+          printf '<!doctype html><meta http-equiv="refresh" content="0; url=./demo/">\n' > _build/index.html
+
+      - name: Remove stale github-pages artifact
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          gh api "repos/${{ github.repository }}/actions/runs/${{ github.run_id }}/artifacts" \
+            --jq '.artifacts[] | select(.name == "github-pages") | .id' |
+          xargs -r -I{} gh api -X DELETE "repos/${{ github.repository }}/actions/artifacts/{}"
+
+      - uses: actions/upload-pages-artifact@v3
+        with:
+          path: _build
+
+  deploy:
+    needs: build
+    runs-on: ubuntu-latest
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+    steps:
+      - id: deployment
+        uses: actions/deploy-pages@v4

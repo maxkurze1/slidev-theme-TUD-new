@@ -1,0 +1,62 @@
+{
+  "name": "slidev-theme-TUD-new",
+  "version": "0.0.1",
+  "type": "module",
+  "packageManager": "pnpm@10.33.2",
+  "description": "Corporate barkhausen Institut theme for SliDev",
+  "keywords": [
+    "slidev-theme",
+    "slidev",
+    "TUD",
+    "Dresden University of Technology"
+  ],
+  "engines": {
+    "node": ">=18.0.0"
+  },
+  "scripts": {
+    "build": "slidev build example.mdc",
+    "dev": "slidev example.mdc --remote",
+    "export": "slidev export example.mdc",
+    "screenshot": "slidev export example.mdc --format png"
+  },
+  "dependencies": {
+    "@slidev/client": "^52.1.0",
+    "@slidev/types": "^52.1.0",
+    "dayjs": "^1.11.20",
+    "gsap": "^3.13.0",
+    "katex": "^0.16.33",
+    "stylus": "^0.64.0",
+    "two.js": "^0.8.23"
+  },
+  "peerDependencies": {
+    "slidev-component-progress": "*"
+  },
+  "peerDependenciesMeta": {
+    "slidev-component-progress": {
+      "optional": true
+    }
+  },
+  "devDependencies": {
+    "@slidev/cli": "^52.1.0",
+    "slidev-component-progress": "github:maxkurze1/slidev-component-progress"
+  },
+  "slidev": {
+    "colorSchema": "light",
+    "defaults": {
+      "aspectRatio": "16/9",
+      "mdc": true,
+      "comark": true,
+      "view-transition-clicks": true,
+      "canvasWidth": 1280,
+      "presenter": true,
+      "titleTemplate": "%s",
+      "transition": "slide-fade-left | slide-fade-right",
+      "favicon": "",
+      "fonts": {
+        "sans": "NotoSans",
+        "mono": "FiraCode",
+        "provider": null
+      }
+    }
+  }
+}

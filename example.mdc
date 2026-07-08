@@ -1,0 +1,350 @@
+---
+theme: ./
+# Hash-based routing to make reload work on GitHub Pages
+routerMode: hash
+# layout: "cover"
+author: "Your Name"
+title: "Some very catchy title"
+subtitle: "With a sub-title"
+group: "Verified System Design Automation"
+location: "Dresden"
+
+# Use single quotes so YAML keeps the backslash literally (double quotes turn \t etc. into escapes).
+date: '\today' # \today -> current date in the long format; \today[YYYY-MM-DD] for a custom day.js format
+# date: '\now[YYYY-MM-DD HH:mm:ss]' # \now defaults to date + time; both \today and \now accept any day.js format
+# date: "January 1st, 2000"
+
+# footer: "{title}\n{group} / {author}\n{location}, {date}"
+# footer: false
+layout: "cover-white"
+addons:
+  - slidev-component-progress
+---
+
+<!-- If you want to have a different title on
+  the slide than in the metadata use a level 1 heading -->
+
+# Here goes your fancy Title
+
+<!-- same thing for the sub-title -->
+## With another sub-title
+
+<!--
+The last comment on every page will be display
+as the speaker notes in the presenter view
+-->
+
+---
+layout: "cover-blue"
+---
+
+# A blue cover slide
+
+---
+layout: "section-white"
+---
+
+# A white section
+
+## Using `section-white`
+
+---
+layout: "section"
+---
+
+
+# And a blue section
+
+## Using `section` or `section-blue`
+
+---
+layout: "section-n"
+variant: 1
+---
+
+
+# Here is the title of the section
+
+Here is a subtitle, the name of the speaker, and additional
+contextual information.
+
+You can customize the colors within the TUD color set.
+
+::detail::
+
+This slide uses `section-n` with `variant: 1`.
+
+---
+layout: "section-n"
+variant: 2
+---
+
+
+
+# Here is the title of the section
+
+Here is a subtitle, the name of the speaker, and additional<br>
+contextual information.
+
+You can customize the colors within the TUD color set.
+
+This slide uses `section-n` with `variant: 2`.
+
+
+---
+layout: "section-n"
+variant: 3
+---
+
+
+# Another section
+
+
+Here is a subtitle, the name of the speaker, and additional<br>
+contextual information.
+
+You can customize the colors within the TUD color set.
+
+::detail::
+
+This slide uses `section-n` with `variant: 3`.
+
+---
+layout: "section-n"
+variant: 4
+---
+
+
+# Another section
+
+## Using `section-n` with `variant: 4`
+
+---
+layout: "section-n"
+variant: 5
+---
+
+
+# Another section
+
+## Using `section-n` with `variant: 5`
+
+---
+layout: "section-n"
+variant: 6
+---
+
+
+# Another section
+
+## Using `section-n` with `variant: 6`
+
+---
+
+
+# A `default` slide
+
+This slide shows the default layout
+
+The TUD theme also supports _italic_, **bold** and `code` text,
+as well as other markdown features like bullet lists:
+
+- statement 1
+- statement 2
+
+## 2nd level heading
+
+normal lists:
+
+1. test
+2. test
+
+---
+
+# Other markdown features
+
+::div{.flex.justify-between}
+## Blockquotes:
+
+> This is a very important
+> quote from a very important person
+::
+
+> # Theorem 1 {.test}
+> Bla bla bla bla blaa
+> theorem bla bla bla
+>
+> $$f(x) := y \times z^2$$
+
+::div{.flex.justify-between.items-center}
+  ::div
+  | Left Align | Center Align | Right Align |
+  |:-----------|:------------:|------------:|
+  | 1          |      1       |           1 |
+  | 2          |      2       |           2 |
+  | 3          |      3       |           3 |
+
+  A plain caption underneath the table. {.caption}
+  ::
+
+  ## Tables
+
+  ::div
+  | Left Align | Center Align | Right Align |
+  |:-----------|:------------:|------------:|
+  | 1          |      1       |           1 |
+  | 2          |      2       |           2 |
+  | 3          |      3       |           3 |
+
+  A numbered caption with a "Table N:" prefix. {.caption .numbered}
+  ::
+::
+
+---
+
+# More numbered tables
+
+::div{.flex.justify-between.items-center}
+  ::div
+  | Left Align | Center Align | Right Align |
+  |:-----------|:------------:|------------:|
+  | 1          |      1       |           1 |
+  | 2          |      2       |           2 |
+  | 3          |      3       |           3 |
+
+  A plain caption underneath the table. {.caption .numbered}
+  ::
+
+  ## Tables
+
+  ::div
+  | Left Align | Center Align | Right Align |
+  |:-----------|:------------:|------------:|
+  | 1          |      1       |           1 |
+  | 2          |      2       |           2 |
+  | 3          |      3       |           3 |
+
+  A numbered caption with a "Table N:" prefix. {.caption .numbered}
+  ::
+::
+
+---
+
+# Latex support
+
+Did you ever use google slides for a theoretical presentation?
+Well then you probably had a lot of pain with formulas.
+
+But with the right tools formulas can be as easy as writing a bit of latex.
+
+<KatexSpan :expr="`\\forall\\, p~src.\\\\ \\texttt{\\htmlClass{text-red}{in}}[src] = p \\to \\lozenge~\\texttt{\\htmlClass{text-blue}{out}}[p.dst] = p`"/>
+
+---
+layout: "cols"
+---
+
+# A slots layout with multiple columns
+
+This layout is named `cols`
+
+> You can put some content above the columns that will span then whole slide
+
+::col-1::
+
+## First
+
+This shows on the left
+
+::col-3::
+
+## Third
+
+This shows on the right
+
+::col-2::
+
+## Second
+
+This shows in the middle
+
+::bottom::
+
+> # The `bottom` slot
+>
+> This is shown on the bottom (below the columns) and spans the whole slide again.
+
+---
+
+# Code examples
+
+Enjoy the ligatures of FiraCode: (And automatic syntax highlighting)
+
+```coq /stalls/ [some-title.js ~~]
+Lemma reset_all_inputs_nsp_correct {data_t dims IdxEnv} {lcl : idx_t dims} (nsp : @noc_state_partial data_t dims IdxEnv) ext1 ext2
+  (stalls : vect bool (length dims * 2 * 2)) :
+  (∀ i,
+    vect_nth stalls i = false ->
+    vect_nth nsp.(nsp_pkgs1)?[vect_nth (list_neighbors_du lcl) (idx_div 2 i)] i = None) ->
+  ∀ sig REnv (sigma : ∀ f : ext_fn_t dims, Sig_denote (Sigma (data_t:=data_t) dims f)) Γv Q,
+  kpm_entails_ret (R:=R dims) (REnv:=REnv) (represent_nsp (nsp_map_pkgs1 nsp (in_channel_update lcl (reset_all_inputs_spec stalls))) ext1 ext2) Γv (tau:=unit_t) (eq Ob) Q ->
+  kpm_entails     (R:=R dims) (REnv:=REnv) (represent_nsp nsp ext1 ext2) Γv (wp_total (sigma:=sigma) (sig:=sig) (InternalCall (reset_all_inputs lcl) (ConstCtx #{
+    ("stalls", array_t (bits_t 1) (length dims * 2 * 2)) => represent stalls
+  }#)) Q).
+```
+
+---
+
+# Images with captions
+
+Add `{.caption}` to an image and its alt text becomes a LaTeX-style
+caption below it:
+
+![A plain caption](https://placehold.co/400x300){.caption .w-40}
+
+::div{.flex.justify-between}
+  ::div{.flex.flex-col.items-center}
+    Add `{.numbered}` as well for a "Figure N:" prefix:
+
+    ![A picture with a very long caption that hopefully eventually line breaks into another second caption line.](https://placehold.co/400x300){.caption .numbered .w-60}
+  ::
+  ::div{.flex.flex-col.items-center}
+    Without the class, an image renders as usual (no caption):
+
+    ![this alt text stays hidden](https://placehold.co/400x300){.w-60}
+  ::
+::
+
+---
+
+<!-- # Footnotes -->
+
+<v-click>
+
+And another footnote here[^note2][]
+
+</v-click>
+
+[^note2]: another 2nd footnote
+
+
+Test[^note][]
+
+[^note]: Some test
+
+---
+
+# More Footnotes
+
+<v-click>
+
+And another footnote here[^note2][]
+
+</v-click>
+
+[^note2]: different footnote
+
+
+Test[^note][] [^note3][]
+
+[^note]: another one
+[^note3]: another one
