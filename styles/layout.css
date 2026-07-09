@@ -117,6 +117,9 @@
     tbody tr:nth-child(even) {
       /* @apply bg-[color-mix(in_srgb,var(--theme-primary)_5%,white)]; */
     }
+    tbody tr {
+      @apply bg-[color-mix(in_srgb,var(--theme-primary)_5%,white)]
+    }
     tbody tr:last-child td {
       @apply border-b-2 border-b-primary;
     }

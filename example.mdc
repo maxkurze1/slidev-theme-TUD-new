@@ -237,7 +237,12 @@ Well then you probably had a lot of pain with formulas.
 
 But with the right tools formulas can be as easy as writing a bit of latex.
 
-<KatexSpan :expr="`\\forall\\, p~src.\\\\ \\texttt{\\htmlClass{text-red}{in}}[src] = p \\to \\lozenge~\\texttt{\\htmlClass{text-blue}{out}}[p.dst] = p`"/>
+$$
+\forall\, \green{p}~src.\\
+\texttt{\red{in}}[src] = \green{p} \to \lozenge~\texttt{\blue{out}}[p.dst] = \green{p}
+$$
+
+Note the usage of the official color scheme inside of latex formulas
 
 ---
 layout: "cols"
