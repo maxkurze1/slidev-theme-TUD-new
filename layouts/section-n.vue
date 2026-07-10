@@ -94,11 +94,11 @@ const sectionLogo = computed<BackgroundLogo>(() => ({
 }))
 useBackgroundLogo(sectionLogo)
 </script>
-<style lang="stylus">
+<style>
 .slidev-layout.section-n {
   code {
     background: none;
-    @apply border-1 border-[var(--section-text,white)];
+    @apply border-2 border-[color-mix(in_srgb,var(--section-text,white)_20%,transparent)];
   }
   color: var(--section-text, white);
   h1, h2, h3, h4, h5, h6, p {
@@ -127,7 +127,7 @@ useBackgroundLogo(sectionLogo)
 }
 .slidev-layout.section-3 {
   .content-main {
-    @apply pb-[175px] pr-[640px]; //pb-[290px]
+    @apply pb-[175px] pr-[640px]; /*pb-[290px]*/
   }
   .content-detail {
     @apply pl-[640px] pt-[320px];

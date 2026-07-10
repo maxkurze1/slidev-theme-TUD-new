@@ -15,7 +15,7 @@ useLogo({ small: 'white' })
 // TODO generalize over bg color via parameter
 </script>
 
-<style lang="stylus">
+<style>
 .slidev-layout.section-blue {
   h1 {
     @apply mb-4;
@@ -26,9 +26,7 @@ useLogo({ small: 'white' })
   }
 
   code {
-    background: none;
-    @apply border-1;
+    @apply bg-white/10;
   }
-  // @apply m-0 absolute bottom-[340px];
 }
 </style>

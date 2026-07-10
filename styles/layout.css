@@ -137,8 +137,7 @@
     h1 {
       @apply text-2xl text-white bg-primary -m-2 mb-2 px-2 py-2;
       code {
-        background: none;
-        @apply border-1;
+        @apply bg-white/10;
       }
     }
     p {
@@ -150,6 +149,9 @@
     p:has(> .katex-display) {
       @apply pb-4;
     } */
+  }
+  :not(pre) > code {
+    @apply bg-gray/10;
   }
 }
 
