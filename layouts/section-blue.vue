@@ -11,7 +11,7 @@
 <script setup lang="ts">
 import { useBackground, useLogo } from '../scripts/background'
 useBackground('primary')
-useLogo({ normal: 'white', small: 'white' })
+useLogo({ small: 'white' })
 // TODO generalize over bg color via parameter
 </script>
 

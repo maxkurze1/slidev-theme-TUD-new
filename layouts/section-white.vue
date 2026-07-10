@@ -10,7 +10,7 @@
 <script setup lang="ts">
 import { useLogo } from '../scripts/background'
 
-useLogo({ normal: 'primary', small: 'primary' })
+useLogo({ small: 'primary' })
 </script>
 <style>
 .slidev-layout.section-white {
