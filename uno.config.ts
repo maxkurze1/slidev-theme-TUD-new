@@ -1,5 +1,5 @@
 import { defineConfig } from 'unocss'
-import { colors } from './scripts/color'
+import { colors, paletteNames } from './scripts/color'
 
 // Expose the same palette as CSS custom properties on :root.
 // e.g. --theme-primary --theme-blue --theme-blue-1 ...
@@ -10,10 +10,17 @@ const paletteVars = Object.entries(colors).flatMap(([name, value]) =>
         `--theme-${name}${shade === 'DEFAULT' ? '' : `-${shade}`}: ${hex};`)
 )
 
+// A class per color (to change the color of components)
+// e.g. .red { --slidev-theme-primary: var(--theme-red) }
+const primaryClasses = paletteNames.map((name) =>
+  `.${name} {\n  --slidev-theme-primary: var(--theme-${name});\n}`
+)
+
 export default defineConfig({
   theme: { colors },
   preflights: [
     { getCSS: () => `:root {\n  ${paletteVars.join('\n  ')}\n}` },
+    { getCSS: () => primaryClasses.join('\n') },
   ],
   rules: [
     [/^vt-([\w-]+)$/, ([, name]) => ({ "view-transition-name": name })],

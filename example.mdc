@@ -256,27 +256,29 @@ This layout is named `cols`
 
 ::col-1::
 
-## First
+## First {.red}
 
-This shows on the left
+This shows on the left in red
 
 ::col-3::
 
-## Third
+## Third {.green}
 
-This shows on the right
+This shows on the right in green
 
 ::col-2::
 
-## Second
+## Second {.magenta}
 
-This shows in the middle
+This shows in the middle in magenta
 
 ::bottom::
 
+::div{.violet}
 > # The `bottom` slot
 >
 > This is shown on the bottom (below the columns) and spans the whole slide again.
+::
 
 ---
 

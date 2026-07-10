@@ -115,10 +115,10 @@
       @apply px-3 py-2 text-gray;
     }
     tbody tr:nth-child(even) {
-      /* @apply bg-[color-mix(in_srgb,var(--theme-primary)_5%,white)]; */
+      /* @apply bg-[color-mix(in_srgb,var(--slidev-theme-primary)_5%,white)]; */
     }
     tbody tr {
-      @apply bg-[color-mix(in_srgb,var(--theme-primary)_5%,white)]
+      @apply bg-[color-mix(in_srgb,var(--slidev-theme-primary)_5%,white)]
     }
     tbody tr:last-child td {
       @apply border-b-2 border-b-primary;
@@ -133,7 +133,7 @@
     /* border-left: 4px solid #4c8ac6; */
     /* background-color: #EFF5FA; */
     /* display: inline-block; */
-    @apply px-2 py-[0.1px] mb-6 border-l-[4px] border-l-primary bg-[color-mix(in_srgb,var(--theme-primary)_5%,white)];
+    @apply px-2 py-[0.1px] mb-6 border-l-[4px] border-l-primary bg-[color-mix(in_srgb,var(--slidev-theme-primary)_5%,white)];
     h1 {
       @apply text-2xl text-white bg-primary -m-2 mb-2 px-2 py-2;
       code {
