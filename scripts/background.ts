@@ -2,7 +2,7 @@
 import { reactive, toValue, watchEffect } from 'vue'
 import type { MaybeRefOrGetter } from 'vue'
 import { useSlideContext } from '@slidev/client'
-import { toCssColor } from './color'
+import { toCssColor, toRawColor } from './color'
 
 function createRegistry<T>() {
   const store = reactive<Record<number, T>>({})
@@ -20,13 +20,21 @@ function createRegistry<T>() {
 const backgroundsReg = createRegistry<string>()
 export const slideBackgrounds = backgroundsReg.store
 export function useBackground(color: MaybeRefOrGetter<string>) {
-  backgroundsReg.publish(() => toCssColor(toValue(color)))
+  backgroundsReg.publish(() => toRawColor(toValue(color)))
 }
 
 
+// A mark's placement. (x, y) is the slide-pixel position of the logo's center
+export interface MarkTransform {
+  scale: number
+  x: number
+  y: number
+  rotate?: number // degrees
+}
+
 export interface BackgroundLogo {
-  bl: string
-  tr: string
+  bl: MarkTransform
+  tr: MarkTransform
   fill?: string
 }
 
@@ -36,7 +44,7 @@ export const slideBgLogos = bgLogosReg.store
 export function useBackgroundLogo(logo: MaybeRefOrGetter<BackgroundLogo>) {
   bgLogosReg.publish(() => {
     const l = toValue(logo)
-    return l.fill === undefined ? l : { ...l, fill: toCssColor(l.fill) }
+    return l.fill === undefined ? l : { ...l, fill: toRawColor(l.fill) }
   })
 }
 

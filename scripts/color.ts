@@ -29,12 +29,23 @@ export const paletteNames: string[] = Object.entries(colors).flatMap(([name, val
 
 export const toCssColor = (name: string) => (new Set(paletteNames).has(name) ? `var(--theme-${name})` : name)
 
+// Resolve a palette colour name to its concrete hex value; pass anything else through unchanged
+export function toRawColor(name: string): string {
+  const [base, shade] = name.split('-')
+  const entry = (colors as Record<string, string | Record<string, string>>)[base]
+  if (typeof entry === 'string') return shade === undefined ? entry : name
+  if (entry !== undefined) return entry[shade ?? 'DEFAULT'] ?? name
+  return name
+}
+
 // Predefined color sets.
 export const COLOR_COMBOS = [
-  { bg: 'red-2',    logo: 'magenta-2', text: 'primary' },
-  { bg: 'violet',   logo: 'magenta',   text: 'white' },
-  { bg: 'violet-2', logo: 'primary',   text: 'white' },
-  { bg: 'teal-1',   logo: 'teal-2',    text: 'primary' },
+  { bg: 'red-2',     logo: 'magenta-2', text: 'primary' },
+  { bg: 'violet',    logo: 'magenta',   text: 'white' },
+  { bg: 'violet-2',  logo: 'primary',   text: 'white' },
+  { bg: 'teal-1',    logo: 'teal-2',    text: 'primary' },
+  { bg: 'yellow-2',  logo: 'teal-2',    text: 'primary' },
+  { bg: 'magenta-2', logo: 'blue-2',    text: 'primary' },
 ] as const
 
 export function comboAt(i: number) {

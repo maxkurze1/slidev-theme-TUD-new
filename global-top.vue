@@ -19,9 +19,11 @@ if (app && !app.component('Progress')) {
 </script>
 
 <template>
-  <Progress level="3" :height="15" thickness="15px" clicks :opacity="1" print
-    marginY="-1px" fillLast emptyFirst scale="clicks"
-    :disable="(layout) => new Set(['cover', 'cover-blue', 'cover-white', 'section', 'section-blue', 'section-white', 'section-n']).has(layout)">
-    <template #marker="args"><MarkersShapes v-bind="args" shape="square" visible="hover" activeStyle="filled"/></template>
-  </Progress>
+  <div class="absolute top-0 left-0 w-full z-10">
+    <Progress level="3" :height="15" thickness="15px" clicks :opacity="1" print
+      marginY="-1px" fillLast emptyFirst scale="clicks"
+      :disable="(layout) => new Set(['cover', 'cover-blue', 'cover-white', 'section', 'section-blue', 'section-white', 'section-n']).has(layout)">
+      <template #marker="args"><MarkersShapes v-bind="args" shape="square" visible="hover" activeStyle="filled"/></template>
+    </Progress>
+  </div>
 </template>

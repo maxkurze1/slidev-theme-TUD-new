@@ -1,9 +1,9 @@
 <template>
   <div>
-    <div
-      class="slide-backdrop absolute inset-0 pointer-events-none duration-[0.5s] transition-[background-color]"
-      :style="{ backgroundColor: pageBackground }"
-    ></div>
+    <Background
+      :bl="pageLogo?.bl" :tr="pageLogo?.tr" :fill="pageLogo?.fill"
+      :background="pageBackground"
+    />
 
     <div v-html="rawLogoText"
       :style="{ fill: logos.text }" :class="{'opacity-0': !logos.text}"
@@ -17,15 +17,6 @@
     <div v-html="rawLogoSmall"
       :style="{ fill: logos.small }" :class="{'opacity-0': !logos.small}"
       class="duration-[0.5s] transition-[opacity,fill] absolute left-[64px] top-[660px] z-10 w-[54px]"
-    ></div>
-
-    <div v-html="rawLogoBl"
-      :class="logoBlClass" :style="{ fill: logoFill }"
-      class="[transition:opacity_0.8s,fill_0.5s,transform_0.5s] [&>svg]:w-[100px] will-change-transform absolute left-[0px] top-[0px] pointer-events-none"
-    ></div>
-    <div v-html="rawLogoTr"
-      :class="logoTrClass" :style="{ fill: logoFill }"
-      class="[transition:opacity_0.8s,fill_0.5s,transform_0.5s] [&>svg]:w-[100px] will-change-transform absolute left-[0px] top-[0px] pointer-events-none"
     ></div>
 
     <footer class="absolute bottom-0 h-16 pb-[13px] pr-[64px] pl-[164px] flex items-baseline gap-x-6 w-full z-100">
@@ -57,8 +48,6 @@ import { expandDateTokens } from './scripts/util';
 import { formatString } from './scripts/util';
 import { slideBackgrounds, slideBgLogos, slideLogos } from './scripts/background';
 
-import rawLogoBl from './assets/TUD-logo-bl.svg?raw';
-import rawLogoTr from './assets/TUD-logo-tr.svg?raw';
 import rawLogo from './assets/TUD-logo-no-color.svg?raw';
 import rawLogoSmall from './assets/TUD-logo-text-small-no-color.svg?raw';
 import rawLogoText from './assets/TUD-logo-text-no-color.svg?raw';
@@ -86,8 +75,5 @@ const footer = computed(() => {
 })
 
 const pageLogo = computed(() => slideBgLogos[$nav.value.currentPage])
-const logoBlClass = computed(() => pageLogo.value?.bl ?? 'scale-[5.0] translate-x-[590px] translate-y-[310px] opacity-0')
-const logoTrClass = computed(() => pageLogo.value?.tr ?? 'scale-[5.0] translate-x-[590px] translate-y-[310px] opacity-0')
-const logoFill = computed(() => pageLogo.value?.fill ?? 'var(--theme-primary)')
 
 </script>
