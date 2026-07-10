@@ -43,8 +43,8 @@
       <div :class="{'opacity-0': !show_footer}" class="duration-[0.5s] transition-opacity w-[66px]">
         <div class="flex items-baseline justify-center">
           <span class="flex-1 text-right font-bold text-lg text-primary">{{ $nav.currentPage }}</span>
-          <span class="text-left text-gray text-xs">.</span>
-          <span class="flex-1 text-left text-gray text-xs">{{ $nav.clicks+1 }}</span>
+          <span :class="{ 'opacity-0': $nav.clicksTotal == 0 }" class="text-left text-gray text-xs">.</span>
+          <span :class="{ 'opacity-0': $nav.clicksTotal == 0 }" class="flex-1 text-left text-gray text-xs">{{ $nav.clicks+1 }}</span>
         </div>
       </div>
     </footer>
