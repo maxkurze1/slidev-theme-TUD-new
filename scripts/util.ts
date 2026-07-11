@@ -1,5 +1,10 @@
 import dayjs from "dayjs";
 import advancedFormat from "dayjs/plugin/advancedFormat";
+import { inject, ref } from "vue";
+import type { Ref } from "vue";
+
+export const WIDTH = 1280
+export const HEIGHT = 720
 
 // `Do` (ordinal day, e.g. "23rd") lives in the advancedFormat plugin.
 dayjs.extend(advancedFormat);
@@ -7,6 +12,15 @@ dayjs.extend(advancedFormat);
 /* ================================ */
 /*        export composables        */
 /* ================================ */
+
+// Slidev's authoritative, reactive slide scale.
+//
+// Caution this relies on Slidev's internal injection key.
+// It seems there is no other way to access the slide's
+// scale reactively.
+export function useScale(): Ref<number> {
+  return inject<Ref<number>>("$$slidev-slide-scale", ref(1));
+}
 
 export function formatString(template : string, values : any) {
   return template.replace(/{(\w+)}/g, (_, key) => values[key] ?? `{${key}}`);
