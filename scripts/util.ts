@@ -1,5 +1,9 @@
-import dayjs from "dayjs";
-import advancedFormat from "dayjs/plugin/advancedFormat";
+// Import dayjs's native ESM build (not the UMD `dayjs`/`dayjs/plugin/*` entries).
+// The UMD bundle has no real `default` export, so when this theme is consumed as a
+// dependency Vite serves it raw and `import dayjs from "dayjs"` throws
+// "doesn't provide an export named: 'default'". The `/esm` build is proper ESM.
+import dayjs from "dayjs/esm";
+import advancedFormat from "dayjs/esm/plugin/advancedFormat";
 import { inject, ref } from "vue";
 import type { Ref } from "vue";
 
