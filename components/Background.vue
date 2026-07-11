@@ -24,6 +24,11 @@ let two: any = null, bgRect: any = null, blGroup: any = null, trGroup: any = nul
 
 const slideScale = useScale()
 
+// Grow the canvas by PAD (slide-space) px on every side
+// This resolves a glitch that caused 1px white "borders" on the canvas.
+// Note: Keep in sync with the container's `-inset-[1px]` class.
+const PAD = 1
+
 const mark = (m: MarkTransform) => ({ ...m, rotate: m.rotate ?? 0 })
 const s = { bl: mark(props.bl), tr: mark(props.tr), col: 'rgba(0,0,0,0)', opacity: 0, bg: 'rgba(0,0,0,0)' }
 
@@ -86,15 +91,15 @@ function track(tween: any) {
 function resize() {
   if (!two) return
   const dpr = window.devicePixelRatio || 1
-  two.renderer.setSize(WIDTH, HEIGHT, dpr * slideScale.value)
+  two.renderer.setSize(WIDTH + 2 * PAD, HEIGHT + 2 * PAD, dpr * slideScale.value)
   apply()
 }
 
 onMounted(() => {
-  two = new Two({ type: Two.Types.canvas, width: WIDTH, height: HEIGHT, autostart: false })
+  two = new Two({ type: Two.Types.canvas, width: WIDTH + 2 * PAD, height: HEIGHT + 2 * PAD, autostart: false })
   two.appendTo(container.value!)
-  two.renderer.domElement.style.display = 'block'
-  bgRect = two.makeRectangle(WIDTH / 2, HEIGHT / 2, WIDTH, HEIGHT)
+  two.scene.translation.set(PAD, PAD) // keep drawn content anchored despite the pad
+  bgRect = two.makeRectangle(WIDTH / 2, HEIGHT / 2, WIDTH + 2 * PAD, HEIGHT + 2 * PAD)
   bgRect.noStroke()
   blGroup = buildMark(rawBl)
   trGroup = buildMark(rawTr)
@@ -121,5 +126,5 @@ watch(() => [props.bl, props.tr, props.fill, props.background], () => {
 </script>
 
 <template>
-  <div ref="container" class="absolute inset-0 pointer-events-none"></div>
+  <div ref="container" class="absolute -inset-[1px] pointer-events-none"></div>
 </template>
