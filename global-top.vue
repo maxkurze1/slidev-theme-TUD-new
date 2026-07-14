@@ -29,6 +29,7 @@ useHead({
   ],
 })
 
+
 // `slidev-component-progress` is optional. When it is installed and
 // enabled (via `addons:`), Slidev auto-imports its <Progress>
 //
@@ -44,13 +45,27 @@ if (app && !app.component('Progress')) {
     defineComponent({ name: 'MarkersShapes', inheritAttrs: false, render: () => null }),
   )
 }
+// Note: setting opacity to 1 directly in the template causes problems from
+// the unocss attributify generated class
+const progressProps = {
+  level: '3',
+  height: 15,
+  thickness: '15px',
+  clicks: true,
+  opacity: 1,
+  print: true,
+  marginY: '-1px',
+  fillLast: true,
+  emptyFirst: true,
+  scale: 'clicks',
+  disable: (layout: string) =>
+    new Set(['cover', 'cover-blue', 'cover-white', 'section', 'section-blue', 'section-white', 'section-n']).has(layout),
+}
 </script>
 
 <template>
   <div class="absolute top-0 left-0 w-full z-10">
-    <Progress level="3" :height="15" thickness="15px" clicks :opacity="1" print
-      marginY="-1px" fillLast emptyFirst scale="clicks"
-      :disable="(layout) => new Set(['cover', 'cover-blue', 'cover-white', 'section', 'section-blue', 'section-white', 'section-n']).has(layout)">
+    <Progress v-bind="progressProps">
       <template #marker="args"><MarkersShapes v-bind="args" shape="square" visible="hover" activeStyle="filled"/></template>
     </Progress>
   </div>
